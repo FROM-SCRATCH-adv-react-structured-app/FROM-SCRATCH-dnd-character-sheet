@@ -7,7 +7,12 @@ export default function App() {
     <Router>
       <Header />
       <Switch>
-        <Route path="/login"></Route>
+        <Route path="/login">
+          <Auth />
+        </Route>
+        <Route path="/register">
+          <Auth isSigningUp />
+        </Route>
       </Switch>
     </Router>
   );
