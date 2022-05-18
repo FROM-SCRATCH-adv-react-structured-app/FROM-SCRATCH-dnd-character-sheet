@@ -6,9 +6,8 @@ export function useForm(inputs = {}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState((prevState) => {
-      return { ...prevState, [name]: value}
-    })
-  }
-
-  return { formState, handleChange}
+      return { ...prevState, [name]: value };
+    });
+  };
+  return { formState, handleChange };
 }
