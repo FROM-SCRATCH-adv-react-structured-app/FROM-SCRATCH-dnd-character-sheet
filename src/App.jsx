@@ -6,6 +6,7 @@ import Home from '../src/views/Home/Home';
 import Header from './views/Header/Header';
 import CharacterList from './views/Characters/List';
 import { CharacterProvider } from './context/CharacterContext';
+import CharacterForm from './views/Characters/Form';
 
 export default function App() {
   return (
@@ -14,6 +15,9 @@ export default function App() {
         <Header />
         <section className={style.body}>
           <Switch>
+          <PrivateRoute exact path="/create_character_form">
+              <CharacterForm />
+            </PrivateRoute>
           <PrivateRoute exact path="/characters">
               <CharacterList />
             </PrivateRoute>
