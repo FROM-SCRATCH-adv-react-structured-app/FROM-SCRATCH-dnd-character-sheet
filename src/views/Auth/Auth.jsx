@@ -46,7 +46,7 @@ export default function Auth() {
               sign into your account
             </span>
           </p>
-          <form onSubmit={handleSignUp}>
+          <form className={style.loginForm} onSubmit={handleSignUp}>
             <input
               type="email"
               name="email"
@@ -59,7 +59,7 @@ export default function Auth() {
               onChange={handleChange}
               placeholder="Password"
             />
-            <button>Sign Up</button>
+            <button className={style.loginButton}>Sign Up</button>
           </form>
         </>
       ) : (
@@ -71,7 +71,7 @@ export default function Auth() {
               sign up for an account
             </span>
           </p>
-          <form onSubmit={handleSignIn}>
+          <form className={style.loginForm} onSubmit={handleSignIn}>
             <input
               type="email"
               name="email"
@@ -84,7 +84,7 @@ export default function Auth() {
               onChange={handleChange}
               placeholder="Password"
             />
-            <button>Sign In</button>
+            <button className={style.loginButton}>Sign In</button>
           </form>
         </>
       )}

@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <section className={style.header}>
-      <button onClick={handleLogout} style={style.logout}>
+      <button onClick={handleLogout} className={style.logoutButton}>
         Logout
       </button>
     </section>
