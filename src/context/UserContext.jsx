@@ -17,6 +17,7 @@ export const UserProvider = ({ children }) => {
     setUser,
     loading,
     setLoading,
+    signUp
   };
 
   const login = async (email, password) => {
@@ -40,7 +41,16 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ userState }}>
+    <UserContext.Provider value={{ signInOrUp,
+      setSignInOrUp,
+      user,
+      setUser,
+      loading,
+      setLoading,
+      signUp,
+      login,
+      logout
+      }}>
       {children}
     </UserContext.Provider>
   );
