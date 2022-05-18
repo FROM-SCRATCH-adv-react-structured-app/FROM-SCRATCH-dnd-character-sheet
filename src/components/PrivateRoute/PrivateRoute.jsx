@@ -1,7 +1,20 @@
-import { Redirect, Route, useLocation } from 'react-router-dom';
+import { useLocation, Redirect, Route } from 'react-router-dom'
+import { useUserContext } from '../../context/UserContext'
 
 export default function PrivateRoute({ children, ...rest }) {
-  const location = useLocation();
+  const { user } = useUserContext();
+  const location = useLocation();;
 
-  return <Route {...rest}></Route>;
+  return (
+    <Route {...rest}>
+      {user.email 
+        ? (children)
+        : (<Redirect to={{
+            pathname: '/login',
+            state: { from: location },
+          }}
+        />
+      )}
+    </Route>
+  );
 }

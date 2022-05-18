@@ -2,7 +2,7 @@ import style from './Header.css';
 import { useUserContext } from '../../context/UserContext';
 
 export default function Header() {
-  const { logout } = useUserContext();
+  const { user, logout } = useUserContext();
 
   function handleLogout(e) {
     e.preventDefault();
@@ -12,9 +12,11 @@ export default function Header() {
 
   return (
     <section className={style.header}>
-      <button onClick={handleLogout} className={style.logoutButton}>
-        Logout
+      {user.email
+      ? <button onClick={handleLogout} className={style.logoutButton}>  Logout
       </button>
+      : '' }
+      
     </section>
   );
 }
