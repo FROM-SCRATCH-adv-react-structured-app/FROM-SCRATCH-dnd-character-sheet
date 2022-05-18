@@ -33,7 +33,7 @@ The header of your app should display the email (or name if you are using profil
             - should create a new item with same data except new user
             - Redirect to edit view after creation
             - or
-            - call add and prepopulate form fields with values from copied object
+            - call add and pre-populate form fields with values from copied object
 - When loading the edit view
     - check that the item is owned by the current user
     - Redirect to the detail view if not

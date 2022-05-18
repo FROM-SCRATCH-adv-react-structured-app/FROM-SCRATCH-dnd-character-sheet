@@ -16,7 +16,7 @@ export default function Auth() {
     try {
       e.preventDefault();
       await signUp(formState.email, formState.password);
-      const url = location.search.from ? location.search.from.pathname : '/';
+      const url = location.search.from ? location.search.from.pathname : '/characters';
 
       history.replace(url);
     } catch (error) {
@@ -27,7 +27,7 @@ export default function Auth() {
   async function handleSignIn(e) {
     e.preventDefault();
     await login(formState.email, formState.password);
-    const url = location.search.from ? location.search.from.pathname : '/';
+    const url = location.search.from ? location.search.from.pathname : '/characters';
     history.replace(url);
   }
 

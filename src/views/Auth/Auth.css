@@ -1,9 +1,7 @@
 .loginSection {
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
   width: 500px;
-  /* background-color: ghostwhite; */
   gap: 5px;
   align-items: center;
   border: 3px solid blue;
