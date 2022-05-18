@@ -7,6 +7,11 @@ const CharacterContext = createContext();
 export const CharacterProvider = ({ children }) => {
   const [characterList, setCharacterList] = useState([]);
 
+  const characterState = {
+    characterList,
+    setCharacterList
+  }
+
   const fetchAllCharacters = async () => {
     const res = await getCharacters();
     console.log('res!!!!!!!!!!', res)
@@ -19,7 +24,7 @@ export const CharacterProvider = ({ children }) => {
   
   return (
     <CharacterContext.Provider
-    value={{}}>
+    value={{ characterState, characterList }}>
       {children}
     </CharacterContext.Provider>
   )
