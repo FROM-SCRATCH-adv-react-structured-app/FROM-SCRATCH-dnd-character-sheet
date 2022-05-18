@@ -1,0 +1,38 @@
+.loginSection {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  /* background-color: ghostwhite; */
+  gap: 5px;
+  align-items: center;
+  border: 3px solid blue;
+  padding: 20px;
+}
+
+h1 {
+  background-color: blue;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.pointer {
+  cursor: pointer;
+  color: red;
+}
+
+.loginButton {
+  width: 100%;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  padding: 0 10px;
+}
