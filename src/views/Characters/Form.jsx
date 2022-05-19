@@ -32,11 +32,15 @@ export default function CharacterForm() {
       hp: 0,
       level: 1,
       stats: stats,
-    }
-    console.log('newCharacter', newCharacter)
-    setCharacter({...newCharacter});
-    handleCreateNewCharacter();
+    };
+    console.log('newCharacter', newCharacter);
+    setCharacter({ ...newCharacter });
   }
+
+  useEffect(() => {
+    console.log(`|| character >`, character);
+    handleCreateNewCharacter();
+  }, [character]);
 
   const statObj = {
     str: '',

@@ -8,10 +8,8 @@ export async function getCharacters() {
   return parseData(request);
 }
 
-export async function createCharacter({ userId, content }) {
-  const request = await client
-    .from('character_sheet')
-    .insert({ user_id: userId, content });
+export async function createCharacter(content) {
+  const request = await client.from('character_sheet').insert({ ...content });
   return parseData(request);
 }
 
