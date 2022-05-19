@@ -1,23 +1,30 @@
-import { createContext, useContext } from 'react';
-import { getCharacters } from '../services/characters';
+import { createContext, useContext, useReducer } from 'react';
+import { createCharacter, getCharacters } from '../services/characters';
 import { useState, useEffect } from 'react';
+
+const characterReducer = async (state, action) => {
+  switch (action.type) {
+    case 'create_character':
+      return {
+        character: action.payload
+      },
+    
+    console.log('action', action);
+    
+    default:
+      throw new Error(`Action type ${action.type} has not been defined in ShoppingListProvider`);
+  };
+}
 
 const CharacterContext = createContext();
 
 export const CharacterProvider = ({ children }) => {
-  const characterObj = {
-    characterName: '',
-  };
+  const [character, setCharacter] = useState({});
   const [characterList, setCharacterList] = useState([]);
-
-  const characterState = {
-    characterList,
-    setCharacterList,
-  };
+  const [characterDispatch, dispatch] = useReducer(characterReducer, character);
 
   const fetchAllCharacters = async () => {
     const res = await getCharacters();
-    console.log('res!!!!!!!!!!', res);
     setCharacterList(res);
   };
 
@@ -25,11 +32,19 @@ export const CharacterProvider = ({ children }) => {
     fetchAllCharacters();
   }, []);
 
+  const handleCreateNewCharacter = () => {
+    dispatch({ type: 'create_character', payload: { characterDispatch }});
+    console.log('characterDispatch', characterDispatch)
+    console.log('character', character)
+  }
+
   return (
     <CharacterContext.Provider
       value={{
-        characterState,
         characterList,
+        character,
+        setCharacter,
+        handleCreateNewCharacter
       }}
     >
       {children}
