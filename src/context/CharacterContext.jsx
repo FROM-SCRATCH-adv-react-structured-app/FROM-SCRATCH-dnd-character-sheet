@@ -33,9 +33,9 @@ export const CharacterProvider = ({ children }) => {
     setCharacterList(res);
   };
 
-  useEffect(() => {
-    fetchAllCharacters();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllCharacters();
+  // }, []);
 
   const handleCreateNewCharacter = async (character) => {
     console.log(`|| submit in CONTEXT >`);
@@ -49,6 +49,7 @@ export const CharacterProvider = ({ children }) => {
   return (
     <CharacterContext.Provider
       value={{
+        fetchAllCharacters,
         characterList,
         character,
         setCharacter,
