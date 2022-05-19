@@ -3,15 +3,40 @@ import { useState, useEffect } from 'react';
 import style from './Form.css';
 import { useCharacter } from '../../context/CharacterContext';
 import { useForm } from '../../hooks/useForm';
+import { useUserContext } from '../../context/UserContext';
 
 export default function CharacterForm() {
+  const { user } = useUserContext();
+  const { character, setCharacter, handleCreateNewCharacter } = useCharacter();
+
   const { formState, handleChange } = useForm({
     characterName: '',
-    characterClass: 'Fighter',
+    characterClass: 'Monk',
+    characterRace: 'Human',
+    characterAlignment: 'Lawful Good',
   });
+
   const [stats, setStats] = useState(statObj);
 
-  function handleSubmit(e) {}
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const newCharacter = {
+      user_id: user.id,
+      name: formState.characterName,
+      class: formState.characterClass,
+      race: formState.characterRace,
+      alignment: formState.characterAlignment,
+      xp: 0,
+      ac: 0,
+      hp: 0,
+      level: 1,
+      stats: stats,
+    }
+    console.log('newCharacter', newCharacter)
+    setCharacter({...newCharacter});
+    handleCreateNewCharacter();
+  }
 
   const statObj = {
     str: '',
@@ -27,7 +52,6 @@ export default function CharacterForm() {
     const d2 = Math.ceil(Math.random() * 6);
     const d3 = Math.ceil(Math.random() * 6);
     const stat = d1 + d2 + d3;
-    console.log(`|| stat >`, stat);
     return stat;
   }
 
@@ -45,16 +69,10 @@ export default function CharacterForm() {
     rollStats();
   }, []);
 
-  function submitCharacter(e) {
-    e.preventDefault();
-    console.log(`|| formState.characterName >`, formState.characterName);
-    console.log(`|| formState.characterClass >`, formState.characterClass);
-  }
-
   return (
     <section className={style.sectionForm}>
       <h2>New Character Form</h2>
-      <form onSubmit={submitCharacter} className={style.characterForm}>
+      <form onSubmit={handleSubmit} className={style.characterForm}>
         <div>
           <label htmlFor="characterName">Character Name</label>
           <input
@@ -76,7 +94,7 @@ export default function CharacterForm() {
             <option value="Knight">Knight</option>
           </select>
         </div>
-        {/* <div className={style.flexColumn}>
+        <div className={style.flexColumn}>
           <label htmlFor="characterRace">Character Race</label>
           <select name="" id="characterRace">
             <option value="Human">Human</option>
@@ -99,7 +117,7 @@ export default function CharacterForm() {
           <p>Int: {stats?.int}</p>
           <p>Wis: {stats?.wis}</p>
           <p>Cha: {stats?.cha}</p>
-        </section> */}
+        </section>
         <button onClick={rollStats}>Reroll Stats</button>
         <button>Create Character</button>
       </form>
