@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 export default function CharacterList() {
-  const { characterList, fetchAllCharacters } = useCharacter();
+  const { characterList, fetchAllCharacters, handleDeleteCharacter } = useCharacter();
   const history = useHistory();
   
   useEffect(() => {
@@ -20,6 +20,7 @@ export default function CharacterList() {
           <CharacterCard 
             key={`${character.id}`}
             character={character}
+            handleDeleteCharacter={handleDeleteCharacter}
             />)}
       </div>
     </>
