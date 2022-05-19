@@ -12,6 +12,11 @@ const characterReducer = async (state, action) => {
       return {
         upload,
       };
+    
+    case 'delete_character':
+      console.log('state', state)
+      const deletedCharacter = state.filter((character) => character.id !== action.payload.id);
+      return [...deletedCharacter];
 
     default:
       throw new Error(
@@ -22,20 +27,20 @@ const characterReducer = async (state, action) => {
 
 const CharacterContext = createContext();
 
+const setInitialCharacterList = async () => {
+  return await getCharacters();
+};
+
 export const CharacterProvider = ({ children }) => {
   const [character, setCharacter] = useState({});
   const { user } = useUserContext();
   const [characterList, setCharacterList] = useState([]);
-  const [characterDispatch, dispatch] = useReducer(characterReducer, character);
+  const [characterDispatch, dispatch] = useReducer(characterReducer, setInitialCharacterList());
 
   const fetchAllCharacters = async () => {
     const res = await getCharacters();
     setCharacterList(res);
   };
-
-  // useEffect(() => {
-  //   fetchAllCharacters();
-  // }, []);
 
   const handleCreateNewCharacter = async (character) => {
     console.log(`|| submit in CONTEXT >`);
@@ -43,8 +48,11 @@ export const CharacterProvider = ({ children }) => {
       type: 'create_character',
       payload: { char: character },
     });
-    // console.log('characterDispatch', characterDispatch);
   };
+
+  const handleDeleteCharacter = async (id) => {
+    dispatch({ type: 'delete_character', payload: { id } });
+  }
 
   return (
     <CharacterContext.Provider
@@ -54,6 +62,8 @@ export const CharacterProvider = ({ children }) => {
         character,
         setCharacter,
         handleCreateNewCharacter,
+        handleDeleteCharacter,
+        characterDispatch
       }}
     >
       {children}
