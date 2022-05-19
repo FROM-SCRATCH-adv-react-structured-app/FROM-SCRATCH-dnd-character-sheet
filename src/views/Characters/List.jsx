@@ -2,11 +2,16 @@ import React from 'react'
 import { useCharacter } from '../../context/CharacterContext';
 import CharacterCard from '../../components/Characters/CharacterCard';
 import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function CharacterList() {
-  const { characterList } = useCharacter();
+  const { characterList, fetchAllCharacters } = useCharacter();
   const history = useHistory();
   
+  useEffect(() => {
+    fetchAllCharacters();
+  }, []);
+
   return (
     <>
       <button onClick={() => history.push('/create_character_form')}>Add New Character</button>

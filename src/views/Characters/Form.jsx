@@ -4,10 +4,13 @@ import style from './Form.css';
 import { useCharacter } from '../../context/CharacterContext';
 import { useForm } from '../../hooks/useForm';
 import { useUserContext } from '../../context/UserContext';
+import { useHistory } from 'react-router-dom';
 
 export default function CharacterForm() {
   const { user } = useUserContext();
   const { character, setCharacter, handleCreateNewCharacter } = useCharacter();
+
+  const history = useHistory();
 
   const { formState, handleChange } = useForm({
     characterName: '',
@@ -35,6 +38,7 @@ export default function CharacterForm() {
     };
     
     await handleCreateNewCharacter({ ...newCharacter });
+    history.replace('/characters');
   }
 
   const statObj = {
