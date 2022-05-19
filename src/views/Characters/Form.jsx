@@ -18,9 +18,9 @@ export default function CharacterForm() {
 
   const [stats, setStats] = useState(statObj);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-
+    console.log('formState', formState)
     const newCharacter = {
       user_id: user.id,
       name: formState.characterName,
@@ -33,14 +33,9 @@ export default function CharacterForm() {
       level: 1,
       stats: stats,
     };
-    console.log('newCharacter', newCharacter);
-    setCharacter({ ...newCharacter });
+    
+    await handleCreateNewCharacter({ ...newCharacter });
   }
-
-  useEffect(() => {
-    console.log(`|| character >`, character);
-    handleCreateNewCharacter();
-  }, [character]);
 
   const statObj = {
     str: '',
@@ -92,7 +87,7 @@ export default function CharacterForm() {
           <select
             name="characterClass"
             id="characterClass"
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
           >
             <option value="Monk">Monk</option>
             <option value="Knight">Knight</option>
@@ -100,7 +95,11 @@ export default function CharacterForm() {
         </div>
         <div className={style.flexColumn}>
           <label htmlFor="characterRace">Character Race</label>
-          <select name="" id="characterRace">
+          <select 
+            name="characterRace" 
+            id="characterRace"
+            onChange={(e) => handleChange(e)}
+          >
             <option value="Human">Human</option>
             <option value="Elf">Elf</option>
             <option value="Half-Elf">Half Elf</option>
@@ -108,7 +107,11 @@ export default function CharacterForm() {
         </div>
         <div className={style.flexColumn}>
           <label htmlFor="characterAlignment">Character Alignment</label>
-          <select name="" id="characterAlignment">
+          <select 
+            name="characterAlignment" 
+            id="characterAlignment"
+            onChange={(e) => handleChange(e)}
+            >
             <option value="Lawful-Good">Lawful Good</option>
             <option value="Neutral-Good">Neutral Good</option>
             <option value="Chaotic-Good">Chaotic Good</option>
@@ -122,9 +125,9 @@ export default function CharacterForm() {
           <p>Wis: {stats?.wis}</p>
           <p>Cha: {stats?.cha}</p>
         </section>
-        <button onClick={rollStats}>Reroll Stats</button>
-        <button>Create Character</button>
+        <button type='submit'>Create Character</button>
       </form>
+        <button onClick={rollStats}>Reroll Stats</button>
     </section>
   );
 }

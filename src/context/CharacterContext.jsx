@@ -15,7 +15,7 @@ const characterReducer = async (state, action) => {
 
     default:
       throw new Error(
-        `Action type ${action.type} has not been defined in ShoppingListProvider`
+        `Action type ${action.type} has not been defined in CharacterProvider`
       );
   }
 };
@@ -37,13 +37,13 @@ export const CharacterProvider = ({ children }) => {
     fetchAllCharacters();
   }, []);
 
-  const handleCreateNewCharacter = () => {
-    console.log(`|| character >`, character);
+  const handleCreateNewCharacter = async (character) => {
+    console.log(`|| submit in CONTEXT >`);
     dispatch({
       type: 'create_character',
-      payload: { user_id: user.id, char: character },
+      payload: { char: character },
     });
-    console.log('characterDispatch', characterDispatch);
+    // console.log('characterDispatch', characterDispatch);
   };
 
   return (
