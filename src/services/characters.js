@@ -9,7 +9,10 @@ export async function getCharacters() {
 }
 
 export async function createCharacter(content) {
-  const request = await client.from('character_sheet').insert({ ...content });
+  const request = await client
+    .from('character_sheet')
+    .insert({ ...content })
+    .single();
   return parseData(request);
 }
 
