@@ -5,37 +5,44 @@ import { useState, useEffect } from 'react';
 const CharacterContext = createContext();
 
 export const CharacterProvider = ({ children }) => {
+  const characterObj = {
+    characterName: '',
+  };
   const [characterList, setCharacterList] = useState([]);
 
   const characterState = {
     characterList,
-    setCharacterList
-  }
+    setCharacterList,
+  };
 
   const fetchAllCharacters = async () => {
     const res = await getCharacters();
-    console.log('res!!!!!!!!!!', res)
+    console.log('res!!!!!!!!!!', res);
     setCharacterList(res);
-  }
+  };
 
   useEffect(() => {
     fetchAllCharacters();
-  }, [])
-  
+  }, []);
+
   return (
     <CharacterContext.Provider
-    value={{ characterState, characterList }}>
+      value={{
+        characterState,
+        characterList,
+      }}
+    >
       {children}
     </CharacterContext.Provider>
-  )
-}
+  );
+};
 
 export const useCharacter = () => {
   const context = useContext(CharacterContext);
 
-  if(context === undefined) {
+  if (context === undefined) {
     throw new Error('useCharacter must be called within a CharacterProvider');
   }
 
   return context;
-}
+};
