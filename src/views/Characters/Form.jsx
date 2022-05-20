@@ -5,10 +5,11 @@ import { CharacterContext } from '../../context/CharContext';
 import { useForm } from '../../hooks/useForm';
 import { useUserContext } from '../../context/UserContext';
 import { useHistory } from 'react-router-dom';
+import { createCharacter } from '../../services/characters';
 
 export default function CharacterForm() {
   const { user } = useUserContext();
-  // const { character, setCharacter, handleCreateNewCharacter } = useCharacter();
+  // const { character, setCharacter, createCharacter } = useC();
 
   const history = useHistory();
 
@@ -37,7 +38,7 @@ export default function CharacterForm() {
       stats: stats,
     };
 
-    await handleCreateNewCharacter({ ...newCharacter });
+    await createCharacter({ ...newCharacter });
     history.replace('/characters');
   }
 

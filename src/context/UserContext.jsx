@@ -10,15 +10,15 @@ export const UserProvider = ({ children }) => {
   const [signInOrUp, setSignInOrUp] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  const userState = {
-    signInOrUp,
-    setSignInOrUp,
-    user,
-    setUser,
-    loading,
-    setLoading,
-    signUp,
-  };
+  // const userState = {
+  //   signInOrUp,
+  //   setSignInOrUp,
+  //   user,
+  //   setUser,
+  //   loading,
+  //   setLoading,
+  //   signUp,
+  // };
 
   const login = async (email, password) => {
     const authenticatedUser = await signInUser({ email, password });
