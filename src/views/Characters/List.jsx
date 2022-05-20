@@ -2,6 +2,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getCharacters } from '../../services/characters';
 import CharacterCard from '../../components/Characters/CharacterCard';
+import style from './List.css';
 
 export default function CharacterList() {
   const [characterList, setCharacterList] = useState([]);
@@ -31,7 +32,10 @@ export default function CharacterList() {
       {/* <button onClick={() => history.push('/create_character_form')}>
         Add New Character
       </button> */}
-      <button onClick={() => history.push('/characters/add')}>
+      <button
+        className={style.addNewCharacter}
+        onClick={() => history.push('/characters/add')}
+      >
         Add New Character
       </button>
       <div>
