@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { deleteCharacterById } from '../../services/characters';
 
 export default function CharacterCard({ character, handleDeleteCharacter }) {
-  function handleDeleteClick() {
-    handleDeleteCharacter(character.id);
+  async function handleDeleteClick() {
+    await deleteCharacterById(character.id);
+    location.reload();
   }
 
   return (
