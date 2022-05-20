@@ -6,9 +6,11 @@ import { useForm } from '../../hooks/useForm';
 import { useUserContext } from '../../context/UserContext';
 import { useHistory } from 'react-router-dom';
 import { createCharacter } from '../../services/characters';
+import { useCharacters } from '../../hooks/characters';
 
 export default function CharacterForm() {
   const { user } = useUserContext();
+  const {  addNewCharacter } = useCharacters();
   // const { character, setCharacter, createCharacter } = useC();
 
   const history = useHistory();
@@ -24,7 +26,7 @@ export default function CharacterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('formState', formState);
+    
     const newCharacter = {
       user_id: user.id,
       name: formState.characterName,
@@ -37,8 +39,8 @@ export default function CharacterForm() {
       level: 1,
       stats: stats,
     };
-
-    await createCharacter({ ...newCharacter });
+    
+    await addNewCharacter(newCharacter);
     history.replace('/characters');
   }
 

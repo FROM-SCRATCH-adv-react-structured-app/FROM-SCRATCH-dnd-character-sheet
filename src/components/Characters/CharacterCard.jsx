@@ -6,8 +6,8 @@ import style from './CharacterCard.css';
 export default function CharacterCard({ character, handleDeleteCharacter }) {
   const { user } = useUserContext();
 
-  console.log(`|| user >`, user);
-  console.log(`|| character >`, character);
+  // console.log(`|| user >`, user);
+  // console.log(`|| character >`, character);
 
   // const isOwner = user.id === character.user_id;
 

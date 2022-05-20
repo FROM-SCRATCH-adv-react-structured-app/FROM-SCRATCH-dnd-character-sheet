@@ -7,12 +7,14 @@ function reducer(characters, { type, payload }) {
     case 'create':
       return [payload, ...characters];
     case 'reset':
-      console.log(`|| payload >`, payload);
+      // console.log(`|| payload >`, payload);
       return payload;
     default:
       throw Error('yep Error');
   }
 }
+
+
 
 export const CharacterProvider = ({ children }) => {
   const [characters, dispatch] = useReducer(reducer);

@@ -15,10 +15,10 @@ export function useCharacters() {
     throw new Error('useCharacters must be used withing a CharacterContext');
   }
 
-  const { character, dispatch } = context;
+  const { characters, dispatch } = context;
 
   useEffect(() => {
-    if (character) return;
+    if (characters) return;
 
     const load = async () => {
       try {
@@ -31,7 +31,14 @@ export function useCharacters() {
     load();
   }, []);
 
-  const addNewCharacter = async (character) => {};
-
-  return { character };
+  const addNewCharacter = async (character) => {
+    try {
+      const payload = await createCharacter(character);
+      dispatch({ type: 'create', payload });
+      return payload;
+    } catch (error) {
+      throw error;
+    }
+  };
+  return { characters, addNewCharacter };
 }
