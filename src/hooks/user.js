@@ -12,6 +12,4 @@ export const useAuth = () => {
   const { user, setUser } = context;
 
   const isLoggedIn = user?.email;
-
-  const 
 };

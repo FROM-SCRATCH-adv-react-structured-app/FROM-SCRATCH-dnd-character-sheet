@@ -9,6 +9,7 @@ import { CharacterProvider } from './context/CharContext';
 import CharacterForm from './views/Characters/Form';
 import { UserProvider } from './context/UserContext';
 import { Redirect } from 'react-router-dom';
+import CharacterDetails from './views/Characters/Details';
 
 export default function App() {
   return (
@@ -22,12 +23,15 @@ export default function App() {
                 <Auth />
               </Route>
               {/* <PrivateRoute exact path="/characters/edit"></PrivateRoute> */}
-              <PrivateRoute exact path="/characters">
-                <CharacterList />
-              </PrivateRoute>
               <PrivateRoute exact path="/characters/add">
                 <CharacterForm />
                 {/* <CharacterList /> */}
+              </PrivateRoute>
+              <PrivateRoute exact path="/characters/:id">
+                <CharacterDetails />
+              </PrivateRoute>
+              <PrivateRoute exact path="/characters">
+                <CharacterList />
               </PrivateRoute>
               {/* <PrivateRoute exact path="/create_character_form">
                 <CharacterForm />

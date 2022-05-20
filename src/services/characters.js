@@ -8,6 +8,15 @@ export async function getCharacters() {
   return parseData(request);
 }
 
+export async function getCharacter(id) {
+  const request = await client
+    .from('character_sheet')
+    .select()
+    .match({ id })
+    .single();
+  return parseData(request);
+}
+
 export async function createCharacter(content) {
   const request = await client
     .from('character_sheet')

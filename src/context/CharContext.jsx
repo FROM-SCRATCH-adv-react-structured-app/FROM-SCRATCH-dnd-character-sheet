@@ -7,8 +7,10 @@ function reducer(characters, { type, payload }) {
     case 'create':
       return [payload, ...characters];
     case 'reset':
-      // console.log(`|| payload >`, payload);
       return payload;
+      // case 'delete':
+      //   return characters.filter((character) => character.id !== payload.id); 
+      //   console.log(`|| payload >`, payload);
     default:
       throw Error('yep Error');
   }

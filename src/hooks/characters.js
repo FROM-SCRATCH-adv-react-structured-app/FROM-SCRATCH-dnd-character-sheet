@@ -3,6 +3,7 @@ import { CharacterContext } from '../context/CharContext';
 import { useUserContext } from '../context/UserContext';
 import {
   getCharacters,
+  getCharacter,
   createCharacter,
   updateCharacterById,
   deleteCharacterById,
@@ -40,5 +41,25 @@ export function useCharacters() {
       throw error;
     }
   };
+
   return { characters, addNewCharacter };
+}
+
+export function useCharacter(id) {
+  const [character, setCharacter] = useState({});
+
+  useEffect(() => {
+    const loadCharData = async () => {
+      try {
+        const character = await getCharacter(id);
+        setCharacter(character);
+      } catch (err) {
+        throw err;
+      }
+    };
+
+    loadCharData();
+  }, [id]);
+
+  return { character };
 }
