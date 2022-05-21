@@ -13,7 +13,6 @@ export default function CharacterDetails() {
   const { id } = useParams();
   const { character, updateCharacter } = useCharacter(id);
   const history = useHistory();
-
   const isOwner = user.id === character.user_id;
 
   async function handleDeleteClick() {
@@ -30,7 +29,7 @@ export default function CharacterDetails() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(`|| formState >`, formState);
+
     const updateChar = {
       id: character.id,
       user_id: user.id,
@@ -49,10 +48,8 @@ export default function CharacterDetails() {
     console.log(`|| updateChar >`, updateChar);
 
     await updateCharacter(updateChar).then(console.log);
-    // history.replace('/characters');
+    location.reload();
   }
-
-  // console.log(`|| character >`, character);
 
   return (
     <>

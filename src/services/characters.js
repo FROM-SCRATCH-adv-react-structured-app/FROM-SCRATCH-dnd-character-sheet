@@ -30,7 +30,7 @@ export async function updateCharacterById(content) {
   const request = await client
     .from('character_sheet')
     .update({ ...content })
-    .match(content.id);
+    .match({ id: content.id });
   console.log(`|| request >`, request);
   return parseData(request);
 }
