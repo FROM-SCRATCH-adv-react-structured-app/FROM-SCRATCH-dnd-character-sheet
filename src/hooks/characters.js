@@ -61,5 +61,25 @@ export function useCharacter(id) {
     loadCharData();
   }, [id]);
 
-  return { character };
+  const updateCharacter = async (edit) => {
+    if (!character) return;
+
+    try {
+      const updated = await updateCharacterById({
+        ...character,
+        ...edit,
+      });
+      const payload = {
+        ...updated,
+        name: character.name,
+      };
+      setCharacter(payload);
+      //  if (character) dispatch({type:'update', payload})
+      return payload;
+    } catch (err) {
+      console.error(err);
+    }
+    // return { character, updateCharacter };
+  };
+  return { character, updateCharacter };
 }

@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useCharacter } from '../../hooks/characters';
 import { useUserContext } from '../../context/UserContext';
-import {
-  deleteCharacterById,
-  updateCharacter,
-} from '../../services/characters';
+import { deleteCharacterById } from '../../services/characters';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useForm } from '../../hooks/useForm';
 import style from './Details.css';
@@ -14,7 +11,7 @@ export default function CharacterDetails() {
   const [edit, setEdit] = useState(false);
   const { user } = useUserContext();
   const { id } = useParams();
-  const { character } = useCharacter(id);
+  const { character, updateCharacter } = useCharacter(id);
   const history = useHistory();
 
   const isOwner = user.id === character.user_id;
@@ -33,7 +30,7 @@ export default function CharacterDetails() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    console.log(`|| formState >`, formState);
     const updateChar = {
       id: character.id,
       user_id: user.id,
@@ -55,7 +52,7 @@ export default function CharacterDetails() {
     // history.replace('/characters');
   }
 
-  console.log(`|| character >`, character);
+  // console.log(`|| character >`, character);
 
   return (
     <>
