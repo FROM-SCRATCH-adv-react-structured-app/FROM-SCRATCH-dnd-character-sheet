@@ -25,11 +25,12 @@ export async function createCharacter(content) {
   return parseData(request);
 }
 
-export async function updateCharacterById(id, content) {
+export async function updateCharacter(content) {
   const request = await client
     .from('character_sheet')
-    .update({ content })
-    .match({ id });
+    .update(content.name)
+    .match(content.id);
+
   return parseData(request);
 }
 
