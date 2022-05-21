@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
+import style from './CharacterCard.css';
+import { Link } from 'react-router-dom';
 
-export default function CharacterCard({ character, handleDeleteCharacter }) {
-
-  function handleDeleteClick() {
-    handleDeleteCharacter(character.id)
-  }
+export default function CharacterCard({ character }) {
 
   return (
-    <>
-      <div>{character.name}</div>
-      <button onClick={handleDeleteClick}>Delete</button>
-    </>
-  )
+    <Link to={`/characters/${character.id}`}>
+      <section className={style.characterCard} onClick={() => {}}>
+        <div>{character.name}</div>
+      </section>
+    </Link>
+    
+  );
 }

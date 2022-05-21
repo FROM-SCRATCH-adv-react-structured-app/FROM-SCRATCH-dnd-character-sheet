@@ -8,6 +8,15 @@ export async function getCharacters() {
   return parseData(request);
 }
 
+export async function getCharacter(id) {
+  const request = await client
+    .from('character_sheet')
+    .select()
+    .match({ id })
+    .single();
+  return parseData(request);
+}
+
 export async function createCharacter(content) {
   const request = await client
     .from('character_sheet')
@@ -16,11 +25,13 @@ export async function createCharacter(content) {
   return parseData(request);
 }
 
-export async function updateCharacterById(id, content) {
+export async function updateCharacterById(content) {
+  console.log(`|| content >`, content);
   const request = await client
     .from('character_sheet')
-    .update({ content })
-    .match({ id });
+    .update({ ...content })
+    .match({ id: content.id });
+  console.log(`|| request >`, request);
   return parseData(request);
 }
 

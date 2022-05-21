@@ -1,14 +1,17 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import style from './Form.css';
-import { useCharacter } from '../../context/CharacterContext';
+import { CharacterContext } from '../../context/CharContext';
 import { useForm } from '../../hooks/useForm';
 import { useUserContext } from '../../context/UserContext';
 import { useHistory } from 'react-router-dom';
+import { createCharacter } from '../../services/characters';
+import { useCharacters } from '../../hooks/characters';
 
 export default function CharacterForm() {
   const { user } = useUserContext();
-  const { character, setCharacter, handleCreateNewCharacter } = useCharacter();
+  const {  addNewCharacter } = useCharacters();
+  // const { character, setCharacter, createCharacter } = useC();
 
   const history = useHistory();
 
@@ -23,7 +26,7 @@ export default function CharacterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('formState', formState)
+    
     const newCharacter = {
       user_id: user.id,
       name: formState.characterName,
@@ -37,7 +40,7 @@ export default function CharacterForm() {
       stats: stats,
     };
     
-    await handleCreateNewCharacter({ ...newCharacter });
+    await addNewCharacter(newCharacter);
     history.replace('/characters');
   }
 
@@ -99,8 +102,8 @@ export default function CharacterForm() {
         </div>
         <div className={style.flexColumn}>
           <label htmlFor="characterRace">Character Race</label>
-          <select 
-            name="characterRace" 
+          <select
+            name="characterRace"
             id="characterRace"
             onChange={(e) => handleChange(e)}
           >
@@ -111,11 +114,11 @@ export default function CharacterForm() {
         </div>
         <div className={style.flexColumn}>
           <label htmlFor="characterAlignment">Character Alignment</label>
-          <select 
-            name="characterAlignment" 
+          <select
+            name="characterAlignment"
             id="characterAlignment"
             onChange={(e) => handleChange(e)}
-            >
+          >
             <option value="Lawful-Good">Lawful Good</option>
             <option value="Neutral-Good">Neutral Good</option>
             <option value="Chaotic-Good">Chaotic Good</option>
@@ -129,9 +132,9 @@ export default function CharacterForm() {
           <p>Wis: {stats?.wis}</p>
           <p>Cha: {stats?.cha}</p>
         </section>
-        <button type='submit'>Create Character</button>
+        <button type="submit">Create Character</button>
       </form>
-        <button onClick={rollStats}>Reroll Stats</button>
+      <button onClick={rollStats}>Reroll Stats</button>
     </section>
   );
 }

@@ -1,0 +1,10 @@
+.characterCard {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.characterCard:hover {
+  box-shadow: 0 0 5px black;
+}
